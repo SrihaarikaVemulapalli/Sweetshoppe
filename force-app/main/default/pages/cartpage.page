@@ -1,0 +1,95 @@
+<apex:page controller="sampleclspro1"  showHeader="false" sidebar="false" standardStylesheets="true" rendered="true">
+ <head>
+        <style type="text/css" media="print">
+            @page {
+            @top-center {content: element(header); }
+            
+            @bottom-left {content: element(footer);}
+            }
+            div.footer 
+            {
+            display: block;
+            padding: 100px;
+            padding-top:25px;
+            position: running(footer);
+            background-color: #232F3E;
+            color:black;
+            }
+     </style>   
+
+  </head>
+         
+
+    <div class="header">
+        <apex:form styleClass="myFormStyle">
+            <apex:variable value="{!0}" var="alltotal"/>
+            
+   <apex:pageBlock >
+       <apex:pageBlockSection columns="3">
+           <apex:outputLabel >
+            <img src="{!$Resource.projectLogo}" width="30%" />
+            </apex:outputLabel>
+                    <apex:outputLabel >
+                        
+                        <h1>
+                          CART ITEMS
+                        </h1>
+                 <style type="text/css">
+                        h1
+                            {
+                            font-family:"Arial Unicode MS";
+                            font-size:32pt;
+                      align="center";
+                            div.sticky
+                           
+                            position: -webkit-sticky;
+                            position: sticky;
+                            top: 0;
+                            padding:5px;
+                            background-color:#BC8F8F;
+                            border: 2px solid #4CAF50;
+                            }
+                        </style>
+           </apex:outputLabel>
+         
+       </apex:pageBlockSection>
+                    <div align="center">
+                    <apex:commandButton value="GO TO HOME" action="{!home}">
+                    
+                    </apex:commandButton>
+       </div>
+                     
+       
+            </apex:pageBlock>
+           <apex:pageBlock rendered="{!flag}" id="cart" title="{!IF(items != NULL && items.size>0,'Cart','There are no Items in the cart.')}">
+            <apex:pageBlockTable value="{!items}" var="i">
+                <apex:column value="{!i.FOOD_ITEM_NAME__c}"/>
+                <apex:column value="{!i.Image__c}"/>
+                <apex:column value="{!i.Quantity__c}" />
+                <apex:column value="{!i.Cost_Per_KG__c}" />
+               <apex:column headerValue="Total Cost" >
+                   <apex:outputField value="{!i.Total_Cost__c}"/>
+                  
+                   <apex:facet name="footer" >
+                   		 <apex:outputLabel value="{!Total_cost}" />
+                   </apex:facet> 
+                </apex:column>
+                
+                <apex:column headerValue="Action">
+                <apex:commandlink value="Delete"  action="{!doDelete}" oncomplete="window.location.reload();">
+                <apex:param name="iId" value="{!i.Id}" assignTo="{!rId}"/>
+                        <apex:actionSupport event="onclick" reRender="cart"/>
+                    </apex:commandlink>
+                </apex:column>
+                 
+            </apex:pageBlockTable>
+              
+               <div align="center">
+                   
+             <apex:commandButton value="Proceed to Buy" action="{!paymentpage}" disabled="{!IF(items !=NULL && items.size > 0 , false,true)}" style="background: #BC8F8F;width:10%;font-size:12px position:relative;"/>
+            
+               </div></apex:pageBlock>            
+            
+           
+     </apex:form></div>
+</apex:page>

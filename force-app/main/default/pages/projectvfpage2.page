@@ -1,0 +1,76 @@
+<apex:page showHeader="false" sidebar="false" standardStylesheets="true" >
+    <style type="text/css">
+        .color1{        
+        background-color:#1A1A56;
+        text-align: center;
+        line-height: 2em;
+        
+        position: top;
+        
+        width: 1600px;
+        height: 120px;
+        margin: 0px auto !Important;        
+        height: 120px;
+        padding:10px;
+        font-size:25px;
+        
+        }
+        h1{
+        background-color:#BC8F8F;    
+        }
+        @page {
+        @top-center {content: element(header); }
+        
+        @bottom-left {content: element(footer);}
+        }
+        div.header 
+        {
+        
+        text-align: center;
+        line-height: 2em;
+        
+        position: top;
+        
+        width: 1600px;
+        height: 120px;
+        margin: 0px auto !Important;        
+        height: 120px;
+        padding:10px;
+        font-size:25px;
+        background-color:#BC8F8F;
+        }
+        
+        div.footer 
+        {
+        display: block;
+        
+        padding: 100px;
+        padding-top:25px;
+        position: running(footer);
+        background-color: #232F3E;
+        color:black;
+        }
+        
+    </style>
+    <apex:pageBlock >
+        <apex:pageBlockSection columns="3">
+            <div class="color1">    
+                <apex:outputLabel >
+                    <img src="{!$Resource.projectLogo}" width="150" height="100"/>  
+                </apex:outputLabel>
+                
+                <apex:outputLabel >
+                    <h1>
+                        SWEET SHOPPE
+                    </h1>  
+                    
+                </apex:outputLabel>
+                <apex:outputLabel >
+                    <img src="{!$Resource.projectLogo}" width="150" height="100"/>  
+                </apex:outputLabel>
+                
+                
+            </div>
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+</apex:page>

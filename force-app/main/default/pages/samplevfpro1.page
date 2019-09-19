@@ -1,0 +1,156 @@
+<apex:page standardStylesheets="true" sidebar="false" showHeader="false"  controller="sampleclspro1" >
+    <!--For header and footer-->
+   
+    <head>
+        <style type="text/css" media="print">
+            @page {
+            @top-center {content: element(header); }
+            
+            @bottom-left {content: element(footer);}
+            }
+            div.header 
+            {
+            
+            text-align: center;
+            line-height: 2em;
+           
+            position: top;
+            
+            width: 1600px;
+            height: 120px;
+            margin: 0px auto !Important;        
+            height: 120px;
+            padding:10px;
+            font-size:25px;
+            background-color:#BC8F8F;
+            }
+            
+            div.footer 
+            {
+            display: block;
+            
+            padding: 100px;
+            padding-top:25px;
+            position: running(footer);
+            background-color: #232F3E;
+            color:black;
+            }
+            
+            .pagenumber:before {
+            content: counter(page);
+            }
+            .pagecount:before {
+            content: counter(pages);
+            }
+        </style>
+    </head>
+    <div class="header">
+        <apex:form styleClass="myFormStyle">
+            <apex:pageMessages />
+            <apex:pageBlock >
+                
+                <apex:pageBlockSection columns="3">
+                    <apex:outputLabel >
+                        <img src="{!$Resource.projectLogo}" width="200" height="200" />
+                    </apex:outputLabel>
+                    <apex:outputLabel >
+                        
+                        <h1>
+                            SWEET SHOPPE
+                        </h1>
+                        
+                        <p>
+                            &nbsp;&nbsp;&nbsp;-One bite at a tym...
+                        </p>
+                        <style type="text/css">
+                            p
+                            {
+                            font-family:"Arial Unicode MS";
+                            font-size:30pt;
+                            }
+       
+                            h1
+                            {
+                            font-family:"Arial Unicode MS";
+                            font-size:32pt;
+                            div.sticky
+                            
+                            position: -webkit-sticky;
+                            position: sticky;
+                            top: 0;
+                            padding:5px;
+                            background-color:#BC8F8F;
+                            border: 2px solid #4CAF50;
+                            }
+                            }
+                            .icon{
+                            padding-left:300px;
+                            padding-bottom:100px;
+                            }
+                            
+                        </style>
+                        </apex:outputLabel>
+                    <apex:outputlabel >                
+                        <apex:inputText value="{!searchkey}"/>
+                        <apex:commandButton value="Search" action="{!search}" style="background:#BC8F8F;width:18%;font-size:12px;"/>&nbsp;
+                        <apex:commandButton value="clear Search" action="{!clear}" style="background:#BC8F8F;width:22%;font-size:12px;"/>&nbsp;
+                        <apex:commandLink type="image/jpg" action="{!cart}">
+                            <apex:image value="{!$Resource.NewCartimg}"  width="8%"></apex:image></apex:commandLink>
+                        <b><apex:outputtext value="{!cartnums}" style="position:relative;font-size:20px;width: 10%;bottom: 18px;" /></b>                                                          
+                    </apex:outputlabel>
+                </apex:pageBlockSection>
+            </apex:pageBlock>
+        </apex:form>
+    </div>   
+    
+    <div class="content">
+        <apex:form >
+            <apex:pageBlock tabStyle="account">               
+                <apex:pageBlockSection title="Branches" collapsible="true" >
+                    <apex:selectList title="Branch" label="Branch" multiselect="false" size="1" > 
+                        <apex:selectOptions value="{!BranchNames}">
+                        </apex:selectOptions>
+                    </apex:selectList>
+                    <apex:commandButton value="search FoodItems" action="{!getdata}" />
+                    
+                </apex:pageBlockSection>
+                
+                <apex:pageBlockTable value="{!ab}" var="a" width="100%">
+                    <apex:column value="{!a.Food_Item_Name__c}"  width="25%"/>
+                    <apex:column value="{!a.Image__c}" />
+                    <apex:column value="{!a.Cost_Per_KG__c}" title="CostPerkg" width="15%"/>
+                    <apex:column headerValue="Quantity in KG" width="15%">
+                        <apex:inputField value="{!a.Quantity__c}"/>
+                        
+                    </apex:column>
+                    <apex:column >
+                        <apex:commandLink value="Add to Cart" action="{!carts}" >    
+                            <apex:image value="{!$Resource.NewCartimg}" width="8%" />
+                            <apex:param value="{!a.Id}" assignTo="{!accId}" name="accId"/>   
+                           <apex:param value="{!a.Quantity__c}" assignTo="{!qunatity}" name="qunatity"/>   
+                        </apex:commandLink> 
+                    </apex:column>
+                </apex:pageBlockTable>
+                
+            </apex:pageBlock>
+        </apex:form>
+    </div>
+    
+    <div class="footer">
+        <apex:pageBlock >
+            
+            <apex:pageBlockSection >
+                <b>
+                    <ul>
+                        <li> Opening Hours:<br/>
+                            10:00am-9:00pm</li>
+                        <li>Email Id: Info@Sweetshoppe.com</li>
+                        <li>Help</li>
+                        <li>About Us</li>
+                        <li>Contact us:040-23064590</li>
+                    </ul></b>
+            </apex:pageBlockSection>
+        </apex:pageBlock> 
+    </div>
+                   
+</apex:page>
